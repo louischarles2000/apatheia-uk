@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import { AuthProvider } from "../context/AuthContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -40,9 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${georgia.variable} font-sans text-text bg-secondary min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

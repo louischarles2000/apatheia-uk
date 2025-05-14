@@ -5,16 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Button from '../../components/ui/Button';
 import Card from '../../components/ui/Card';
+import { useAuth } from '../../context/AuthContext';
+import { withAuth } from '../../context/AuthContext';
 
-export default function AccountDashboard() {
-  // In a real application, we would fetch user data from an API or context
-  const user = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    dateJoined: new Date("2023-01-15"),
-  };
-
+function AccountDashboard() {
+  const { user, signOut, loading } = useAuth();
+  
   // Mock purchased resources
   const purchasedResources = [
     {
@@ -77,9 +73,11 @@ export default function AccountDashboard() {
                   </li>
                   <li>
                     <button 
+                      onClick={signOut}
+                      disabled={loading}
                       className="block w-full text-left p-2 rounded-md hover:bg-gray-100 transition-colors text-red-500"
                     >
-                      Sign Out
+                      {loading ? 'Signing out...' : 'Sign Out'}
                     </button>
                   </li>
                 </ul>
@@ -94,10 +92,10 @@ export default function AccountDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="font-serif text-2xl font-bold mb-2">
-                    Welcome back, {user.firstName}!
+                    Welcome back, {user?.firstName || 'User'}!
                   </h1>
                   <p className="text-text/70">
-                    Member since {user.dateJoined.toLocaleDateString()}
+                    Member since {user?.dateJoined ? new Date(user.dateJoined).toLocaleDateString() : 'N/A'}
                   </p>
                 </div>
                 <Button href="/resources" variant="primary">
@@ -173,10 +171,10 @@ export default function AccountDashboard() {
                   <div>
                     <h3 className="text-lg font-medium mb-3">Account Details</h3>
                     <p className="mb-1">
-                      <span className="text-text/70">Name:</span> {user.firstName} {user.lastName}
+                      <span className="text-text/70">Name:</span> {user?.firstName || ''} {user?.lastName || ''}
                     </p>
                     <p>
-                      <span className="text-text/70">Email:</span> {user.email}
+                      <span className="text-text/70">Email:</span> {user?.email || ''}
                     </p>
                     <div className="mt-4">
                       <Link 
@@ -203,3 +201,6 @@ export default function AccountDashboard() {
     </div>
   );
 }
+
+// Wrap the component with the withAuth HOC to protect this route
+export default withAuth(AccountDashboard);
