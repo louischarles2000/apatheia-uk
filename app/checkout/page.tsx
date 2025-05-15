@@ -5,6 +5,16 @@ import CheckoutForm from '../../components/checkout/CheckoutForm';
 import OrderSummary from '../../components/checkout/OrderSummary';
 import { useRouter } from 'next/navigation';
 
+// Define a type for the form data
+interface FormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  cardNumber?: string;
+  expiryDate?: string;
+  cvc?: string;
+}
+
 export default function CheckoutPage() {
   const router = useRouter();
 
@@ -26,7 +36,7 @@ export default function CheckoutPage() {
     }
   ];
 
-  const handleSubmit = (formData: any) => {
+  const handleSubmit = (formData: FormData) => {
     console.log("Checkout submitted with data:", formData);
     // In a real app, you would process payment here
     

@@ -14,7 +14,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-4">
-                Let's build a world of healthy minds.
+                Let&apos;s build a world of healthy minds.
               </h1>
               <p className="text-lg md:text-xl text-text/80 mb-8">
                 Create understanding and growth in significant aspects of your life.
@@ -25,7 +25,8 @@ export default function Home() {
             </div>
             <div className="relative h-64 md:h-80 lg:h-96">
               <Image
-                src="/images/hero-image.jpg"
+                src="/images/circle-pattern.svg"
+                // src="/images/hero-image.jpg"
                 alt="Professional with resources"
                 fill
                 className="object-contain rounded-lg"
@@ -141,7 +142,7 @@ export default function Home() {
                     <p className="text-sm text-text/70">{testimonial.title}</p>
                   </div>
                 </div>
-                <p className="text-text/80 italic">"{testimonial.quote}"</p>
+                <p className="text-text/80 italic">&ldquo;{testimonial.quote}&rdquo;</p>
               </Card>
             ))}
           </div>

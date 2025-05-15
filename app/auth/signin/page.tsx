@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';
 import { useAuth } from '../../../context/AuthContext';
@@ -118,7 +117,7 @@ export default function SignIn() {
           
           <div className="mt-6 text-center">
             <p className="text-text/70">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/auth/signup" className="text-primary hover:text-primary/80">
                 Sign up
               </Link>
@@ -128,4 +127,4 @@ export default function SignIn() {
       </div>
     </div>
   );
-} 
+}

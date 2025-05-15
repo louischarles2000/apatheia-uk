@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +7,7 @@ import Badge from '../../../components/ui/Badge';
 import { Resource } from '../../../types/resource';
 import ResourceCard from '../../../components/resources/ResourceCard';
 
+
 // In a real application, this would come from a database or API
 const getResourceBySlug = (slug: string) => {
   return mockResources.find(resource => resource.slug === slug);
@@ -17,14 +16,20 @@ const getResourceBySlug = (slug: string) => {
 const getRelatedResources = (resource: Resource) => {
   // Get 3 related resources based on specializations
   return mockResources
-    .filter(r => r.id !== resource.id && 
+    .filter(r => r.id !== resource.id &&
       r.specializations.some(spec => resource.specializations.includes(spec)))
     .slice(0, 3);
 };
 
-export default function ResourceDetailPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function ResourceDetailPage({ params }: PageProps) {
   const resource = getResourceBySlug(params.slug);
-  
+
   if (!resource) {
     return (
       <div className="container-custom py-16 text-center">
@@ -45,8 +50,8 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
         {/* Breadcrumbs */}
         <div className="mb-6">
           <p className="text-sm text-text/60">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link> / 
-            <Link href="/resources" className="mx-2 hover:text-primary transition-colors">Resources</Link> / 
+            <Link href="/" className="hover:text-primary transition-colors">Home</Link> /
+            <Link href="/resources" className="mx-2 hover:text-primary transition-colors">Resources</Link> /
             <span>{resource.title}</span>
           </p>
         </div>
@@ -60,20 +65,20 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
                 <Rating value={resource.rating} />
                 <span className="ml-2 text-sm text-text/60">({resource.downloadCount} downloads)</span>
               </div>
-              
+
               <h1 className="font-serif text-3xl font-bold text-text mb-4">{resource.title}</h1>
-              
+
               <p className="text-text/80 mb-6">
                 {resource.fullDescription || resource.description}
               </p>
-              
+
               <div className="mb-6">
                 <div className="flex items-center mb-2">
                   <span className="font-medium mr-2">Specializations:</span>
                   <div className="flex flex-wrap gap-2">
                     {resource.specializations.map((spec, i) => (
-                      <Link 
-                        key={i} 
+                      <Link
+                        key={i}
                         href={`/specializations/${spec}`}
                         className="text-xs bg-primary/10 text-primary py-1 px-2 rounded-full hover:bg-primary/20 transition-colors"
                       >
@@ -82,19 +87,19 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <span className="font-medium mr-2">Date added:</span>
                   <span className="text-text/60">{resource.dateAdded.toLocaleDateString()}</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <span className="text-2xl font-bold">${resource.price}</span>
                 <Button variant="primary" className="px-8">Add to Cart</Button>
               </div>
             </div>
-            
+
             <div className="relative min-h-[300px]">
               <Image
                 src={resource.imageUrl || "/images/placeholder.jpg"}
@@ -105,7 +110,7 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
             </div>
           </div>
         </div>
-        
+
         {/* Related Resources */}
         {relatedResources.length > 0 && (
           <div className="mt-12">

@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import Button from '../ui/Button';
 
+interface CheckoutFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  cardNumber?: string;
+  expiryDate?: string;
+  cvc?: string;
+}
+
 interface CheckoutFormProps {
-  onSubmit: (data: any) => void;
+  onSubmit: (data: CheckoutFormData) => void;
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({ onSubmit }) => {

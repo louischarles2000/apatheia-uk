@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Card from '../ui/Card';
 import { Specialization } from '../../types/specialization';
+import Image from 'next/image';
 
 interface SpecializationCardProps {
   specialization: Specialization;
@@ -13,11 +14,13 @@ const SpecializationCard: React.FC<SpecializationCardProps> = ({ specialization 
       <div className="p-6 flex flex-col h-full">
         <div className="flex items-center mb-4">
           {specialization.iconUrl ? (
-            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-3">
-              <img
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-3 relative">
+              <Image
                 src={specialization.iconUrl}
                 alt={specialization.name}
-                className="w-6 h-6"
+                width={24} // Set the desired width and height
+                height={24}
+                className="w-6 h-6 object-contain"
               />
             </div>
           ) : (

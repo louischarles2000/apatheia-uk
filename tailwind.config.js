@@ -14,7 +14,7 @@ module.exports = {
         text: "#1A2E44", // Dark navy
       },
       fontFamily: {
-        serif: ["var(--font-georgia)"],
+        serif: ["var(--font-lora)", "serif"], // Updated from georgia to lora
         sans: ["var(--font-inter)", "sans-serif"],
       },
       backgroundImage: {

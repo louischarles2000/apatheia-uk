@@ -31,9 +31,12 @@ export default function ForgotPassword() {
         <Card className="p-8">
           <div className="text-center mb-8">
             <h1 className="font-serif text-2xl font-bold mb-2">Forgot Password</h1>
-            <p className="text-text/70">
-              Enter your email address and we'll send you a link to reset your password
-            </p>
+          <p className="text-text/70">
+            Enter your email address and we&apos;ll send you a link to reset your password
+          </p>
+          <p className="mb-6 text-text/70">
+            Didn&apos;t receive an email? Check your spam folder or try again.
+          </p>
           </div>
           
           {error && (
@@ -49,7 +52,7 @@ export default function ForgotPassword() {
               </div>
               
               <p className="mb-6 text-text/70">
-                Didn't receive an email? Check your spam folder or try again.
+                Didn&apos;t receive an email? Check your spam folder or try again.
               </p>
               
               <Button
@@ -108,4 +111,4 @@ export default function ForgotPassword() {
       </div>
     </div>
   );
-} 
+}

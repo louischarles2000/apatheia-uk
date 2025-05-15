@@ -141,7 +141,8 @@ function AccountDashboard() {
                   </div>
                 ) : (
                   <div className="p-6 text-center">
-                    <p className="text-text/70 mb-4">You haven't purchased any resources yet.</p>
+                    {/* <p className="text-text/70 mb-4">You haven't purchased any resources yet.</p> */}
+                    <p className="text-text/70 mb-4">You haven&apos;t purchased any resources yet.</p>
                     <Button href="/resources" variant="primary">
                       Explore Resources
                     </Button>

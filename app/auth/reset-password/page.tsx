@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Card from '../../../components/ui/Card';
 import Button from '../../../components/ui/Button';
@@ -18,7 +18,6 @@ export default function ResetPassword() {
 
   const { resetPassword, loading, error } = useAuth();
   const searchParams = useSearchParams();
-  const router = useRouter();
   const token = searchParams.get('token');
 
   useEffect(() => {
