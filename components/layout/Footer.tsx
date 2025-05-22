@@ -15,10 +15,10 @@ const Footer: React.FC = () => {
               <div className="relative h-10 w-10 bg-primary rounded-full mr-3 flex items-center justify-center">
                 <span className="text-white font-serif font-bold">A</span>
               </div>
-              <span className="font-serif text-xl font-bold text-white">Apatheia UK</span>
+              <span className="font-serif text-xl font-bold text-white">Apatheia</span>
             </Link>
             <p className="text-gray-300 mb-4">
-              Let&apos;s build a world of healthy minds.
+              Transform your potential into reality.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-white hover:text-primary transition-colors">
@@ -44,28 +44,28 @@ const Footer: React.FC = () => {
             <h3 className="text-white font-serif text-lg font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/resources" className="text-gray-300 hover:text-primary transition-colors">
-                  Resource Library
+                <Link href="/" className="text-gray-300 hover:text-primary transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/specializations" className="text-gray-300 hover:text-primary transition-colors">
-                  Specializations
+                <Link href="/products" className="text-gray-300 hover:text-primary transition-colors">
+                  Products
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-gray-300 hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-gray-300 hover:text-primary transition-colors">
-                  Blog
+                  About
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-gray-300 hover:text-primary transition-colors">
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/account" className="text-gray-300 hover:text-primary transition-colors">
+                  My Account
                 </Link>
               </li>
             </ul>
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <Link href="/terms" className="text-gray-300 hover:text-primary transition-colors">
-                  Terms of Service
+                  Terms & Conditions
                 </Link>
               </li>
               <li>
@@ -86,37 +86,44 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/cookies" className="text-gray-300 hover:text-primary transition-colors">
-                  Cookie Policy
+                <Link href="/delivery" className="text-gray-300 hover:text-primary transition-colors">
+                  Delivery Information
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-gray-300 hover:text-primary transition-colors">
+                  FAQ
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Company Contact Info */}
           <div className="md:col-span-1">
-            <h3 className="text-white font-serif text-lg font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-300 mb-4">
-              Subscribe to our newsletter to receive updates on new resources and professional insights.
-            </p>
-            <form className="space-y-3">
+            <h3 className="text-white font-serif text-lg font-bold mb-4">Contact Information</h3>
+            <div className="space-y-3">
               <div>
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
+                <h4 className="text-white font-medium mb-1">Address:</h4>
+                <p className="text-gray-300">
+                  Apatheia UK LTD<br />
+                  3rd Floor, 45 Albemarle Street<br />
+                  Mayfair, London, W1S 4JL
+                </p>
               </div>
-              <Button type="submit" variant="primary" className="w-full">
-                Subscribe
-              </Button>
-            </form>
+              <div>
+                <h4 className="text-white font-medium mb-1">Company Registration:</h4>
+                <p className="text-gray-300">16424981</p>
+              </div>
+              <div>
+                <h4 className="text-white font-medium mb-1">Email:</h4>
+                <p className="text-gray-300">support@apatheia.org.uk</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
-          <p>© {new Date().getFullYear()} Apatheia UK. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Apatheia UK LTD. All rights reserved. Registration Number: 16424981</p>
         </div>
       </div>
     </footer>

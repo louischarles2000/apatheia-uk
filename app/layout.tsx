@@ -17,8 +17,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Apatheia UK | Therapy & Counseling Resources",
-  description: "Professional resources for therapists and counselors to enhance their practice and support their clients.",
+  title: "Apatheia | Personal Development Resources",
+  description: "Professional-grade personal development resources for achievers. Build habits, improve focus, enhance leadership skills, and achieve your goals without overwhelm.",
 };
 
 export default function RootLayout({
