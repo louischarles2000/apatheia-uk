@@ -1,14 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Button from '../components/ui/Button';
-import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
-import ProductCard from '../components/products/ProductCard';
-import { Product } from '../types/resource';
+import FeaturedProducts from '../components/products/FeaturedProducts';
+import TopReviews from '../components/products/TopReviews';
 
 export default function Home() {
-  // Get featured products
-  const featuredProducts = products.filter(product => product.featured).slice(0, 3);
 
   return (
     <div className="bg-secondary">
@@ -56,31 +53,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 bg-secondary">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <Badge variant="primary" className="mb-3">Featured Products</Badge>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-text mb-4">
-              Recommended for You
-            </h2>
-            <p className="text-lg text-text/70 max-w-2xl mx-auto">
-              These top-rated resources have helped thousands transform their lives
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Button href="/products" variant="outline">
-              View All Products
-            </Button>
-          </div>
-        </div>
-      </section>
+      <FeaturedProducts />
 
       {/* Why Choose Our Resources Section */}
       <section className="py-16 bg-white">
@@ -138,146 +111,8 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-secondary">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-text mb-4">
-              What Our Customers Say
-            </h2>
-            <p className="text-lg text-text/70 max-w-2xl mx-auto">
-              Hear from people who have transformed their lives with our resources
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mr-4">
-                    <span className="text-primary font-bold text-lg">{testimonial.name.charAt(0)}</span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
-                    <p className="text-sm text-text/70">{testimonial.title}</p>
-                  </div>
-                </div>
-                <p className="text-text/80 italic">&ldquo;{testimonial.quote}&rdquo;</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TopReviews />
     </div>
   );
 }
 
-// Product Data
-const products: Product[] = [
-  {
-    id: "1",
-    title: "The Art Of Consistency",
-    slug: "the-art-of-consistency",
-    type: "Audio Book",
-    format: ["Audio Book", "Checklist"],
-    description: "Build lasting habits through the power of consistent action. Master the daily disciplines that lead to achievement.",
-    price: 59.99,
-    downloadCount: 2453,
-    rating: 4.8,
-    imageUrl: "/images/products/mental.jpg",
-    fileSize: "75MB",
-    pages: 39,
-    includes: [
-      "Comprehensive ebook (39 pages)",
-      "10 audio files",
-      "Printable consistency checklist",
-      "Quick-reference cheatsheet"
-    ],
-    dateAdded: new Date("2023-05-15"),
-    featured: true
-  },
-  {
-    id: "2",
-    title: "Focus Mastery",
-    slug: "focus-mastery",
-    type: "Video Course",
-    format: ["Video Course", "Audio Files", "Ebook", "Checklist"],
-    description: "Master your attention in a distracted world. Learn proven techniques to eliminate distractions and achieve deep focus.",
-    price: 79.99,
-    downloadCount: 1829,
-    rating: 4.9,
-    imageUrl: "/images/products/mind.jpg",
-    fileSize: "126MB",
-    pages: 36,
-    videoDuration: "36 minutes",
-    includes: [
-      "Comprehensive ebook (36 pages)",
-      "10 instructional videos with voiceover",
-      "10 audio files",
-      "Printable focus checklist"
-    ],
-    dateAdded: new Date("2023-06-02"),
-    featured: true
-  },
-  {
-    id: "3",
-    title: "Level Up Your Leadership",
-    slug: "level-up-your-leadership",
-    type: "Video Course",
-    format: ["Video Course", "Audio Files", "Ebook", "Checklist"],
-    description: "Develop essential skills to lead effectively. Transform your leadership approach with practical, actionable strategies.",
-    price: 89.99,
-    downloadCount: 1556,
-    rating: 4.7,
-    imageUrl: "/images/products/therapy.jpg",
-    fileSize: "78MB",
-    pages: 45,
-    videoDuration: "36 minutes",
-    includes: [
-      "Comprehensive ebook (45 pages)",
-      "10 instructional videos with voiceover",
-      "10 audio files",
-      "Leadership assessment checklist"
-    ],
-    dateAdded: new Date("2023-07-20"),
-    featured: true
-  },
-  {
-    id: "7",
-    title: "Transform Your Life",
-    slug: "transform-your-life",
-    type: "Audio Book",
-    format: ["Audio", "Book"],
-    description: "Build habits that lead to lasting change. Create systems that transform your life from the inside out.",
-    price: 69.99,
-    downloadCount: 3102,
-    rating: 4.9,
-    imageUrl: "/images/products/transform.jpg",
-    fileSize: "28MB",
-    pages: 75,
-    includes: [
-      "Comprehensive ebook (75 pages)",
-      "Audio version for on-the-go learning"
-    ],
-    dateAdded: new Date("2023-06-15"),
-    featured: true
-  }
-];
-
-// Testimonials data
-const testimonials = [
-  {
-    name: "Michael Thompson",
-    title: "Business Professional",
-    quote: "The Focus Mastery program completely changed how I work. I'm now twice as productive and feel much less stressed at the end of each day."
-  },
-  {
-    name: "Sarah Johnson",
-    title: "Leadership Coach",
-    quote: "As someone who teaches leadership skills, I'm impressed by the quality of the Level Up Your Leadership resource. It's comprehensive yet practical."
-  },
-  {
-    name: "David Chen",
-    title: "Entrepreneur",
-    quote: "The Consistent Action Framework gave me the structure I needed to finally make progress on my business goals. Worth every penny."
-  }
-];

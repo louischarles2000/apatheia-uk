@@ -3,7 +3,8 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import { AuthProvider } from "../context/AuthContext";
+import { StoreProvider } from "../context/StoreProvider";
+import { CurrencyProvider } from "../context/CurrencyContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -29,11 +30,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${lora.variable} font-sans text-text bg-secondary min-h-screen flex flex-col`}>
-        <AuthProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </AuthProvider>
+        <StoreProvider>
+          <CurrencyProvider>
+            <>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            </>
+          </CurrencyProvider>
+        </StoreProvider>
       </body>
     </html>
   );

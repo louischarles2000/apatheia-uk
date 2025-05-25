@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Badge from '../../components/ui/Badge';
 import Button from '../../components/ui/Button';
+import axios from 'axios';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
   
   const [formStatus, setFormStatus] = useState<{
     submitted: boolean;
@@ -33,36 +35,31 @@ export default function ContactPage() {
     setFormData(prevData => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    
-    // In a real application, this would send the form data to a server
-    // For now, we'll just simulate a successful submission
-    
-    setTimeout(() => {
-      setFormStatus({
-        submitted: true,
-        success: true,
-        message: 'Thank you for your message. We will get back to you soon!'
-      });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      
-      // Reset status after 5 seconds
-      setTimeout(() => {
+    setLoading(true);
+    try {
+      const res = await axios.post('/api/contact', formData);
+      if (res) {
         setFormStatus({
-          submitted: false,
-          success: false,
+          submitted: true,
+          success: true,
+          message: 'Thank you for your message. We will get back to you soon!'
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
           message: ''
         });
-      }, 5000);
-    }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const faqs = [
@@ -107,7 +104,7 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-lg text-text/70">
-              Have questions about our products? We're here to help.
+              {`Have questions about our products? We're here to help.`}
             </p>
           </div>
           
@@ -213,8 +210,8 @@ export default function ContactPage() {
                   ></textarea>
                 </div>
                 
-                <Button type="submit" variant="primary" className="w-full">
-                  Send Message
+                <Button type="submit" variant="primary" className="w-full disabled:bg-primary/50" disabled={loading}>
+                  {loading ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>
