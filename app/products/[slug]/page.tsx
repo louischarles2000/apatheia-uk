@@ -31,9 +31,9 @@ const getRelatedProducts = async(productId: number): Promise<ProductType[]> => {
 export async function generateMetadata({
     params,
 }: {
-    params: { slug: string }; // Simplified: params is directly the object, not a Promise
+    params: Promise<{ slug: string }>; // Simplified: params is directly the object, not a Promise
 }): Promise<Metadata> {
-  const { slug } = params; // No 'await' needed here, as params is already the resolved object
+  const { slug } = await params; // No 'await' needed here, as params is already the resolved object
 
 
   if (!slug) {
@@ -66,14 +66,24 @@ export async function generateMetadata({
 }
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
   // const [quantity, setQuantity] = useState(1);
-  const product = await getProductBySlug(params.slug);
+  const { slug } = await params;
+  if (!slug) {
+    return (
+      <div className="container-custom py-16 text-center">
+        <h1 className="font-serif text-2xl mb-4">Product not found</h1>
+        <p className="mb-8">The product you are looking for does not exist.</p>
+        <Button href="/products" variant="primary">
+          Back to Products
+        </Button>
+      </div>
+    );
+  }
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return (
