@@ -1,27 +1,23 @@
 'use client'
 import React from 'react'
-import { useStore } from '../../context/StoreProvider';
-import { usePrice } from '../hooks/usePrice';
+import { useCurrency } from '../../context/CurrencyContext';
 
-function PriceFormat({ amount }: { amount: string }) {
-  const { currency: storeCurrency } = useStore();
-  const { getPrice } = usePrice();
+function PriceFormat({ amount }: { amount: string | number }) {
+  const { convertPrice, formatPrice } = useCurrency();
 
-  // Convert the string amount to a number and use our currency conversion
-  const priceInUSD = parseFloat(amount);
-  
-  // Use our new currency conversion system, but fall back to the store's currency 
-  // format if there's an issue
-  try {
-    return <>{getPrice(priceInUSD)}</>;
-  } catch {
-    // Fallback to the original implementation
-    return (
-      <>
-        {storeCurrency.symbol_left}{priceInUSD.toFixed(storeCurrency.decimal_place)}{storeCurrency.symbol_right}
-      </>
-    );
+  // Convert the amount to a number. If it's already a number, use it directly.
+  const priceAsNumber = typeof amount === 'string' ? parseFloat(amount) : amount;
+
+  if (isNaN(priceAsNumber)) {
+    console.error("Invalid amount passed to PriceFormat:", amount);
+    return <>N/A</>; // Or some other placeholder for invalid price
   }
+
+  // Assuming the 'amount' prop is always in USD if not converted yet.
+  // The convertPrice function in CurrencyContext expects the base price in USD.
+  const convertedAmount = convertPrice(priceAsNumber);
+  
+  return <>{formatPrice(convertedAmount)}</>;
 }
 
 export default PriceFormat

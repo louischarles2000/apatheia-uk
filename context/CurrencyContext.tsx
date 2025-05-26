@@ -31,7 +31,7 @@ type CurrencyContextType = {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>("USD");
+  const [currency, setCurrency] = useState<Currency>("GBP");
 
   // Load saved currency preference from localStorage when available
   useEffect(() => {
