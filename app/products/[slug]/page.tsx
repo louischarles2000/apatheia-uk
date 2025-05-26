@@ -31,9 +31,10 @@ const getRelatedProducts = async(productId: number): Promise<ProductType[]> => {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: { slug: string }; // Simplified: params is directly the object, not a Promise
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params; // No 'await' needed here, as params is already the resolved object
+
 
   if (!slug) {
     return {

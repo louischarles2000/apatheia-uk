@@ -154,7 +154,7 @@ export default function CartPage() {
             </svg>
             <h1 className="font-serif text-2xl font-bold mb-4">Your Cart is Empty</h1>
             <p className="text-text/70 mb-8">
-              It looks like you haven't added any products to your cart yet.
+              It looks like you haven&rsquo;t added any products to your cart yet.
             </p>
             <Button href="/products" variant="primary">
               Browse Products
