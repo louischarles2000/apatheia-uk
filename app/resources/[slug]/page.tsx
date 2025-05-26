@@ -4,9 +4,24 @@ import Link from 'next/link';
 import Button from '../../../components/ui/Button';
 import Rating from '../../../components/ui/Rating';
 import Badge from '../../../components/ui/Badge';
-import { Resource } from '../../../types/resource';
+// import { Resource } from '../../../types/resource';
 import ResourceCard from '../../../components/resources/ResourceCard';
 
+type Resource = {
+  id: string;
+  title: string;
+  slug: string;
+  type: string; // e.g., "Guide", "Template", etc.
+  description: string;
+  fullDescription?: string;   // Optional, for detailed view
+  price: number;  // Price in USD
+  downloadCount: number; // Number of times downloaded
+  rating: number; // Average rating out of 5
+  imageUrl?: string; // URL to the resource image
+  specializations: string[]; // Array of specialization slugs
+  dateAdded: Date; // Date when the resource was added
+  featured?: boolean; // Whether the resource is featured
+};
 
 // In a real application, this would come from a database or API
 const getResourceBySlug = (slug: string) => {
@@ -17,18 +32,19 @@ const getRelatedResources = (resource: Resource) => {
   // Get 3 related resources based on specializations
   return mockResources
     .filter(r => r.id !== resource.id &&
-      r.specializations.some(spec => resource.specializations.includes(spec)))
+      r.specializations.some((spec: string) => resource.specializations.includes(spec)))
     .slice(0, 3);
 };
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function ResourceDetailPage({ params }: PageProps) {
-  const resource = getResourceBySlug(params.slug);
+export default async function ResourceDetailPage({ params }: PageProps) {
+  const {  slug } = await params;
+  const resource = getResourceBySlug(slug);
 
   if (!resource) {
     return (
@@ -76,7 +92,7 @@ export default function ResourceDetailPage({ params }: PageProps) {
                 <div className="flex items-center mb-2">
                   <span className="font-medium mr-2">Specializations:</span>
                   <div className="flex flex-wrap gap-2">
-                    {resource.specializations.map((spec, i) => (
+                    {resource.specializations.map((spec: string, i: number) => (
                       <Link
                         key={i}
                         href={`/specializations/${spec}`}
