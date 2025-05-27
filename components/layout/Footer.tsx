@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
             <h3 className="text-white font-serif text-lg font-bold mb-4">Contact Information</h3>
             <div className="space-y-3">
               <div>
-                <h4 className="text-white font-medium mb-1">Address:</h4>
+                {/* <h4 className="text-white font-medium mb-1"></h4> */}
                 <p className="text-gray-300">
                   Apatheia UK LTD<br />
                   3rd Floor, 45 Albemarle Street<br />
