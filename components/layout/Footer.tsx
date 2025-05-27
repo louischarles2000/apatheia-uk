@@ -200,7 +200,6 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
           <p>
             © {new Date().getFullYear()} Apatheia UK LTD. All rights reserved.
-            Registration Number: 16424981
           </p>
         </div>
       </div>

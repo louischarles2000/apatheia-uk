@@ -40,7 +40,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-80 md:h-96">
               <Image
-                src="/images/about/philosophy.jpg"
+                src="/images/products/mind.jpg"
                 alt="Practical personal development tools"
                 fill
                 className="object-cover rounded-lg"
