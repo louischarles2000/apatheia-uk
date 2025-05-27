@@ -98,7 +98,13 @@ export default function ProductsPage() {
               className={`px-4 py-2 rounded-full font-medium transition-colors ${
                 activeTab === category.id ? "bg-primary text-white" : "bg-white text-text hover:bg-primary/10"
               }`}
-              onClick={() => setActiveTab(category.id)}
+              onClick={() => {
+                setActiveTab(category.id);
+                setPage(1); // Reset to first page when changing category
+                setProducts([]); // Clear previous results
+                setHasMore(false); // Reset hasMore state
+                setSearchQuery(""); // Clear search query when changing category
+              }}
             >
               {category.category_name}
             </button>
