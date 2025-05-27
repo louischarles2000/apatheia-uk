@@ -59,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, featured }) => {
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
             <Rating value={product.rating??0} />
-            <span className="ml-2 text-xs text-text/60">({product.totalReviews ?? 0})</span>
+            {/* <span className="ml-2 text-xs text-text/60">({product.totalReviews ?? 0})</span> */}
           </div>
           {!product.discount_price && <span className="font-bold"><PriceFormat amount={product.price} /></span>}
           {product.discount_price && (
