@@ -21,7 +21,7 @@ const Header: React.FC = () => {
       <div className="container-custom py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Image src="apatheia.svg" className='w-24' alt="Apatheia UK" width={48} height={48} />
+          <Image src="Apatheia.svg" className='w-24' alt="Apatheia UK" width={48} height={48} />
         </Link>
 
         {/* Mobile menu button */}
