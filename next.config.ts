@@ -6,25 +6,25 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "shop.alphaelemental.com",
+        hostname: "shop.apatheia.org.uk",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "http",
-        hostname: "shop.alphaelemental.com",
+        hostname: "shop.apatheia.org.uk",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "alphaelemental.com",
+        hostname: "apatheia.org.uk",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "http",
-        hostname: "alphaelemental.com",
+        hostname: "apatheia.org.uk",
         port: "",
         pathname: "/**",
       },
