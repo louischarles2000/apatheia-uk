@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Button from '../ui/Button';
 import { useCurrency } from '../../context/CurrencyContext';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,10 +21,7 @@ const Header: React.FC = () => {
       <div className="container-custom py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <div className="relative h-10 w-10 bg-primary rounded-full mr-3 flex items-center justify-center">
-            <span className="text-white font-serif font-bold">A</span>
-          </div>
-          <span className="font-serif text-xl font-bold text-text">Apatheia</span>
+          <Image src="apatheia.svg" className='w-24' alt="Apatheia UK" width={48} height={48} />
         </Link>
 
         {/* Mobile menu button */}
