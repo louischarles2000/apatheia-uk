@@ -4,31 +4,21 @@ FROM node:18
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
-COPY package*.json ./
-
-# Install dependencies
+# Copy the package.json and install dependencies
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
-# Create the fonts directory explicitly
-RUN mkdir -p /app/public/fonts
+# Copy the rest of the app's code
+COPY . .
 
-# Copy the font files
-COPY public/fonts /app/public/fonts
-
-# Debug: List files in the fonts directory
-RUN ls -lR /app/public/fonts
-
-# Copy the application code
-COPY . ./
-
-# Build the application
+# Build the app
 RUN npm run build
 
-# Expose the port
+# Expose the port that Next.js runs on
 EXPOSE 3000
 
-# Start the server
+# Start the Next.js app
 CMD ["npm", "start"]
 
 # Disable telemetry
