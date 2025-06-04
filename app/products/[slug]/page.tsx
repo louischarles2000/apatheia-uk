@@ -15,12 +15,30 @@ import { formatDecodedString } from '../../../lib/utils';
 import { IMAGE_PREFIX } from '../../../lib/constants';
 import { Metadata } from 'next';
 import ProductReviews from '../../../components/products/ProductReviews';
+import { cache } from 'react';
 
+
+export async function generateStaticParams() {
+  // Fetch all product slugs from the API
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL!}/product/static/slugs`);
+  if (!response.data || !Array.isArray(response.data.slugs)) {
+    return [];
+  }
+
+  // Map slugs to the format Next.js expects
+  return response.data.slugs;
+}
 // In a real application, this would come from a database or API
-const getProductBySlug = async(slug: string): Promise<ProductType> => {
-  const product = await axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_URL!}/api/products/slug/${slug}`);
-  return product.data.Data;
-};
+// cache is used to optimize performance by caching the result of the function
+const getProductBySlug = cache(async(slug: string): Promise<ProductType | null> => {
+  try {
+    const product = await axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_URL!}/api/products/slug/${slug}`);
+    return product.data.Data;
+  } catch (error: unknown) {
+    if (error) return null;
+    return null; // Return null if the product is not found or an error occurs
+  }
+});
 
 const getRelatedProducts = async(productId: number): Promise<ProductType[]> => {
   // Get 3 related products based on type
@@ -49,6 +67,7 @@ export async function generateMetadata({
     return {
       title: 'Product Not Found',
       description: 'Product details not available.',
+      
     };
   }
 
@@ -59,7 +78,12 @@ export async function generateMetadata({
     openGraph: {
       title: formatDecodedString(product.meta_title ?? product.title),
       description: product.meta_description ? formatDecodedString(product.meta_description) : formatDecodedString(product.description, 300),
-      images: [`${IMAGE_PREFIX}/${product.image}`], // Use the product image URL
+      images: [
+        { 
+          url: product.image ? `${IMAGE_PREFIX}/${product.image}` : '/images/placeholder.jpg',
+          alt: product.title || 'Product Image'
+        }
+      ], // Use the product image URL
     },
     // Add other relevant metadata here
   };

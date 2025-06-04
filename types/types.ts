@@ -20,6 +20,8 @@ export type ProductType = {
   rating?: number;
   totalReviews?: number;
   slug: string;
+  date_modified?: string;
+  date_added?: string;
 }
 
 export type CategoryType = {

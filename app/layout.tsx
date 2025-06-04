@@ -18,8 +18,14 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Apatheia | Personal Development Resources",
+  title: {
+    default: "Apatheia | Personal Development Resources",
+    template: "%s | Apatheia",
+  },
   description: "Professional-grade personal development resources for achievers. Build habits, improve focus, enhance leadership skills, and achieve your goals without overwhelm.",
+  twitter: {
+    card: "summary_large_image",
+  }
 };
 
 export default function RootLayout({
