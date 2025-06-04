@@ -18,16 +18,16 @@ import ProductReviews from '../../../components/products/ProductReviews';
 import { cache } from 'react';
 
 
-export async function generateStaticParams() {
-  // Fetch all product slugs from the API
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL!}/product/static/slugs`);
-  if (!response.data || !Array.isArray(response.data.slugs)) {
-    return [];
-  }
+// export async function generateStaticParams() {
+//   // Fetch all product slugs from the API
+//   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL!}/product/static/slugs`);
+//   if (!response.data || !Array.isArray(response.data.slugs)) {
+//     return [];
+//   }
 
-  // Map slugs to the format Next.js expects
-  return response.data.slugs;
-}
+//   // Map slugs to the format Next.js expects
+//   return response.data.slugs;
+// }
 // In a real application, this would come from a database or API
 // cache is used to optimize performance by caching the result of the function
 const getProductBySlug = cache(async(slug: string): Promise<ProductType | null> => {
@@ -169,50 +169,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 {formatDecodedString(product.meta_description || product.description, 300)}
               </p>
 
-              {/* <div className="mb-4">
-                <h3 className="font-medium mb-2">Format:</h3>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {product.format.map((format, i) => (
-                    <span 
-                      key={i}
-                      className="text-xs bg-secondary py-1 px-2 rounded-full"
-                    >
-                      {format}
-                    </span>
-                  ))}
-                </div>
-              </div> */}
-
-              {/* <div className="mb-4">
-                <h3 className="font-medium mb-2">Includes:</h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  {product.includes.map((item, i) => (
-                    <li key={i} className="text-text/80">{item}</li>
-                  ))}
-                </ul>
-              </div> */}
-
-              {/* <div className="mb-4">
-                <div className="flex items-center mb-2">
-                  <span className="font-medium mr-2">File Size:</span>
-                  <span className="text-text/80">{product.fileSize}</span>
-                </div>
-                
-                {product.pages && (
-                  <div className="flex items-center mb-2">
-                    <span className="font-medium mr-2">Pages:</span>
-                    <span className="text-text/80">{product.pages}</span>
-                  </div>
-                )}
-                
-                {product.videoDuration && (
-                  <div className="flex items-center mb-2">
-                    <span className="font-medium mr-2">Video Duration:</span>
-                    <span className="text-text/80">{product.videoDuration}</span>
-                  </div>
-                )}
-              </div> */}
-
               <div className="flex items-center space-x-4 mt-6">
                 {!product.discount_price && <span className="text-2xl font-bold"><PriceFormat amount={product.price} /></span>}
                 { product.discount_price && (
@@ -225,21 +181,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                 )}
-                {/* <div className="flex items-center border rounded-md">
-                  <button 
-                    className="px-3 py-1 border-r"
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  >
-                    -
-                  </button>
-                  <span className="px-4 py-1">{quantity}</span>
-                  <button 
-                    className="px-3 py-1 border-l"
-                    onClick={() => setQuantity(quantity + 1)}
-                  >
-                    +
-                  </button>
-                </div> */}
+               
                 <Link
                   href={`${process.env.NEXT_PUBLIC_OPENCART_SHOP}&product_id=${product.id}`}
                   className="flex w-full justify-end self-end cursor-pointer"
