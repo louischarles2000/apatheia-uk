@@ -18,16 +18,16 @@ import ProductReviews from '../../../components/products/ProductReviews';
 import { cache } from 'react';
 
 
-// export async function generateStaticParams() {
-//   // Fetch all product slugs from the API
-//   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL!}/product/static/slugs`);
-//   if (!response.data || !Array.isArray(response.data.slugs)) {
-//     return [];
-//   }
+export async function generateStaticParams() {
+  // Fetch all product slugs from the API
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL!}/product/static/slugs`);
+  if (!response.data || !Array.isArray(response.data.slugs)) {
+    return [];
+  }
 
-//   // Map slugs to the format Next.js expects
-//   return response.data.slugs;
-// }
+  // Map slugs to the format Next.js expects
+  return response.data.slugs;
+}
 // In a real application, this would come from a database or API
 // cache is used to optimize performance by caching the result of the function
 const getProductBySlug = cache(async(slug: string): Promise<ProductType | null> => {
