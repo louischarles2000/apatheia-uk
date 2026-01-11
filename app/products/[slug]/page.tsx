@@ -28,8 +28,8 @@ export async function generateStaticParams() {
   // Map slugs to the format Next.js expects
   return response.data.slugs;
 }
-// In a real application, this would come from a database or API
-// cache is used to optimize performance by caching the result of the function
+
+// cache is used to optimize performance by caching the result of the function. Incase the same slug is requested multiple times, it will return the cached result instead of making a new API call.
 const getProductBySlug = cache(async(slug: string): Promise<ProductType | null> => {
   try {
     const product = await axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_URL!}/api/products/slug/${slug}`);
